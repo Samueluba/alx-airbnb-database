@@ -1,0 +1,17 @@
+digraph Airbnb_ERD {
+	rankdir=LR size=10
+	User [label=<<b>User</b><br/>+ user_id (PK)<br/>first_name<br/>last_name<br/>email (UQ)<br/>password_hash<br/>phone_number<br/>role<br/>created_at> shape=record]
+	Property [label=<<b>Property</b><br/>+ property_id (PK)<br/>host_id (FK)<br/>name<br/>description<br/>location<br/>pricepernight<br/>created_at<br/>updated_at> shape=record]
+	Booking [label=<<b>Booking</b><br/>+ booking_id (PK)<br/>property_id (FK)<br/>user_id (FK)<br/>start_date<br/>end_date<br/>total_price<br/>status<br/>created_at> shape=record]
+	Payment [label=<<b>Payment</b><br/>+ payment_id (PK)<br/>booking_id (FK)<br/>amount<br/>payment_date<br/>payment_method> shape=record]
+	Review [label=<<b>Review</b><br/>+ review_id (PK)<br/>property_id (FK)<br/>user_id (FK)<br/>rating<br/>comment<br/>created_at> shape=record]
+	Message [label=<<b>Message</b><br/>+ message_id (PK)<br/>sender_id (FK)<br/>recipient_id (FK)<br/>message_body<br/>sent_at> shape=record]
+	User -> Property [label="1:N (host_id)"]
+	User -> Booking [label="1:N (guest bookings)"]
+	Property -> Booking [label="1:N"]
+	Booking -> Payment [label="1:N"]
+	User -> Review [label="1:N"]
+	Property -> Review [label="1:N"]
+	User -> Message [label="1:N (sender)"]
+	User -> Message [label="1:N (recipient)"]
+}
